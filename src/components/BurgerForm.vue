@@ -8,17 +8,17 @@
                     <input type="text" id="nome" name="nome" v-model="nome" placeholder="Digite o seu nome" >
                 </div>
                 <div class="input-container" >
-                    <label for="pao">Escolha o Pão:</label>
+                    <label for="pao">Escolha o pão:</label>
                     <select name="pao" id="pao" v-model="pao">
-                        <option value="">Selecione o seu Pão</option>
-                        <option v-for="pao in paes" :key="pao.id" value="pao.tipo">{{pao.tipo}}</option>
+                        <option value="">Selecione o seu pão</option>
+                        <option v-for="pao in paes" :key="pao.id" :value="pao.tipo">{{ pao.tipo }}</option>
                     </select>
                 </div>
                 <div class="input-container" >
-                    <label for="carne">Escolha a Carne:</label>
-                    <select name="pao" id="pao" v-model="carne">
-                        <option value="">Selecione o tipo Carne</option>
-                        <option v-for="carne in carnes" :key="carne.id" value="carne.tipo">{{carne.tipo}}</option>
+                    <label for="carne">Escolha a carne do seu Burger:</label>
+                    <select name="carne" id="carne" v-model="carne">
+                        <option value="">Selecione o tipo de carne</option>
+                        <option v-for="carne in carnes" :key="carne.id" :value="carne.tipo">{{ carne.tipo }}</option>
                     </select>
                 </div>
                 <div id="opcionais-container" class="input-container" >
@@ -54,14 +54,15 @@ export default {
     },
     methods: {
         async getIngredientes(){
-            const req = await fetch('http://localhost:3000/ingredientes')
-            const data = await req.json()
-            
+           const req = await fetch('http://localhost:3000/ingredientes')
+           const data = await req.json()
+
             this.paes = data.paes
             this.carnes = data.carnes
             this.opcionaisdata = data.opcionais
         },
         async createBurger(e){
+
             e.preventDefault()
 
             const data = {
@@ -71,7 +72,23 @@ export default {
                 opcionais: Array.from(this.opcionais),
                 status: "Solicitado"
             }
-            console.log(data)
+
+             const dataJson = JSON.stringify(data)    
+             const req = await fetch("http://localhost:3000/burgers", {
+                method: "POST",
+                headers: { "Content-Type" : "application/json" },
+                body: dataJson
+             });
+
+              const res = await req.json()
+              console.log(res)
+
+              // limpar campos
+              this.nome = ""
+              this.carne = ""
+              this.pao = ""
+              this.opcionais = []
+        
         }
     },
     mounted(){

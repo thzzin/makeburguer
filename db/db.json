@@ -79,25 +79,25 @@
   ],
   "burgers": [
     {
-      "nome": "Thiago",
-      "carne": "Alcatra",
+      "nome": "dasd",
+      "carne": "Picanha",
+      "pao": "Parmesão e Orégano",
+      "opcionais": [
+        "Cebola roxa",
+        "Pepino"
+      ],
+      "status": "Solicitado",
+      "id": 1
+    },
+    {
+      "nome": "asdasda",
+      "carne": "Maminha",
       "pao": "3 Queijos",
       "opcionais": [
         "Bacon"
       ],
       "status": "Finalizado",
-      "id": 3
-    },
-    {
-      "nome": "Thiago",
-      "carne": "Alcatra",
-      "pao": "Parmesão e Orégano",
-      "opcionais": [
-        "Bacon",
-        "Salame"
-      ],
-      "status": "Solicitado",
-      "id": 4
+      "id": 2
     }
   ]
 }
